@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CartLane </title>
+
+    <style>
+        body {
+            /* box-sizing: border-box; */
+            padding: 0;
+            margin: 0;
+        }
+
+        #navbar {
+            position: fixed;
+            width: 100%;
+            top: 0px;
+            background-color: white;
+        }
+
+        #top-nav {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 3px 0px;
+        }
+
+        #top-nav+main {
+            box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+            height: 70px;
+        }
+
+        #nav-left {
+            width: 60%;
+            float: left;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        #nav-left a {
+            font-size: 0.8rem;
+            text-decoration: none;
+            color: #4f3267;
+        }
+
+        #nav-left a:hover {
+            color: rgb(214, 85, 85);
+            text-decoration: underline;
+        }
+
+        #nav-left>a>img {
+            padding: 0 1rem;
+        }
+
+        #nav-right {
+            height: 60px;
+            width: 38%;
+            float: right;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #nav-right img {
+            width: 100%;
+            height: 33px;
+            border-radius: 50%;
+        }
+
+        #nav-right>div {
+            padding: 0 1rem;
+        }
+
+        form .fa-sharp {
+            background: linear-gradient(to right,
+                    rgb(222, 87, 229),
+                    rgb(136, 99, 251));
+            color: white;
+            padding: 0.4rem 1rem 0.5rem 1rem;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        form .fa-sharp:hover {
+            cursor: pointer;
+        }
+
+        form input {
+            border-right: none;
+            padding: 0.3rem 1rem;
+        }
+
+        form input:focus {
+            outline: none;
+        }
+
+        nav {
+            height: 22px;
+
+            display: flex;
+            padding: 0.7rem 0px;
+            justify-content: center;
+            align-items: center;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+        nav>div {
+            margin: 0px 1.5rem;
+
+            padding: 0.5rem 0px;
+            position: relative;
+        }
+
+        nav>div>a {
+            text-decoration: none;
+            font-size: 0.7rem;
+            color: black;
+        }
+
+        nav>div::after {
+            transition: all 1s linear;
+            /* border-image: ; */
+        }
+
+        nav>div:hover {
+            border-bottom: 2px solid rgb(222, 87, 229);
+            text-shadow: 2px 10px 20px rgb(222, 87, 229);
+        }
+
+
+
+
+        #user-login i:hover {
+            cursor: pointer;
+            border-bottom: 2px solid rgb(222, 87, 229);
+        }
+
+        #mid-images>div:nth-child(1)>img {
+            width: 100%;
+
+        }
+
+        #mid-images>div:nth-child(1)>img:hover {
+            cursor: pointer;
+        }
+
+        #mid-images {
+            margin-top: 9rem;
+        }
+
+        #shaya-images {
+            width: 95%;
+
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 400px);
+            gap: 2rem;
+            margin: 1.5rem auto;
+        }
+
+        #shaya-images>div>img {
+            width: 100%;
+            height: 100%;
+        }
+
+        #shaya-images>div:nth-child(1) {
+            grid-row-start: 1;
+            grid-row-end: 3;
+        }
+
+        #shaya-images img:hover {
+            cursor: pointer;
+        }
+
+        /* Rings six images */
+        #rings {
+            display: grid;
+            width: 95%;
+            margin: auto;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        #rings>div {
+            transition: 1s;
+        }
+
+        #rings>div:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+            z-index: 1;
+        }
+
+        #rings img {
+            width: 100%;
+        }
+
+        /*  three view all collection images  and collection button*/
+        #collection {
+            width: 95%;
+            gap: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            margin: 4rem auto 1rem auto;
+            display: grid;
+        }
+
+        #collection>div:nth-child(1),
+        #collection>div:nth-child(3) {
+            margin-top: 3rem;
+        }
+
+        #collection>div>img {
+            width: 100%;
+
+            transition: transform 0.5s;
+            display: block;
+        }
+
+        #collection>div>img:hover {
+            cursor: pointer;
+
+            transform: scale(1.1);
+            border-radius: 1rem;
+        }
+
+        #collection>div {
+            overflow: hidden;
+        }
+
+        #collection-btn {
+            text-align: center;
+        }
+
+        #collection-btn button {
+            padding: 0.7rem;
+            font-size: 1rem;
+            background-color: transparent;
+            border-color: rgb(222, 87, 229);
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        #collection-btn button:hover {
+            cursor: pointer;
+        }
+
+        /* sale,discount and location images */
+        #sale-Images {
+            width: 95%;
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(2, 1fr);
+            margin: 4rem auto 1rem auto;
+        }
+
+        #sale-Images>div>img {
+            width: 100%;
+        }
+
+        /* exchange-heading  */
+        #exchange-title {
+            background-color: #eeeeee;
+        }
+
+        #exchange-heading {
+            width: 95%;
+            margin: auto;
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        #exchange-heading>div:nth-child(1) {
+            width: 100%;
+            text-align: center;
+        }
+
+        #exchange-heading>div:nth-child(2) {
+            padding: 4rem 1.5rem;
+        }
+
+        #exchange-heading>div:nth-child(2)>button {
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(to right,
+                    rgb(222, 87, 229),
+                    rgb(136, 99, 251));
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #exchange-heading>div:nth-child(2)>h1 {
+            font-size: 2rem;
+        }
+
+        .line-1 {
+            display: inline-block;
+            vertical-align: top;
+            width: 64px;
+            height: 1px;
+            background: linear-gradient(to left, #8863fb, #de57e5);
+            border: none;
+            margin-left: 0;
+        }
+
+        .line-2 {
+            display: inline-block;
+            vertical-align: top;
+            width: 12px;
+            height: 1px;
+            background: #8863fb;
+            border: none;
+            margin-left: 8px;
+        }
+
+        #spirit-CaratLane-title {
+            background-color: rgb(35, 21, 53);
+            margin: 2rem 0px;
+            padding: 2rem;
+        }
+
+        #spirit-CaratLane {
+            width: 25%;
+            margin: auto;
+            text-align: center;
+        }
+
+        #spirit-CaratLane>img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 0px;
+        }
+
+        #spirit-CaratLane>img+p {
+            margin-top: 0px;
+            color: rgb(196, 173, 225);
+        }
+
+        .btn {
+            padding: 0.7rem 1rem;
+            background-color: rgb(35, 21, 53);
+            color: white;
+            margin-bottom: 0.5rem;
+            border-color: rgb(161 130 201);
+        }
+
+        .btn:hover {
+            cursor: pointer;
+        }
+
+        /* <!-- product displays --> */
+        #cartLane-product-heading {
+            width: 95%;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #product-heading-right {
+            padding: 0.7rem 0rem;
+            border: 1px solid rgb(136, 99, 251);
+        }
+
+        #product-heading-right>span {
+            padding: 0.7rem 45px;
+
+            margin: auto 0px;
+        }
+
+        #product-heading-right>span:hover {
+            cursor: pointer;
+        }
+
+        #product-display {
+            width: 95%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            align-items: center;
+            gap: 2rem;
+        }
+
+        #product-display>a {
+            color: black;
+        }
+
+
+        #product-display>a>div:hover {
+            cursor: pointer;
+
+        }
+
+        #product-display>a {
+            text-decoration: none;
+        }
+
+
+        .product-img {
+            box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+                rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+            width: 100%;
+
+        }
+
+        .product-text {
+            padding: 0px 1rem;
+            margin-top: 1rem;
+        }
+
+        .product-text>h2,
+        .product-text>h3 {
+
+            display: inline;
+            margin: 2rem 1rem 0px 0px;
+        }
+
+        .product-text>h3 {
+            text-decoration: line-through;
+        }
+
+
+        #product-display img {
+            width: 100%;
+            height: 350px;
+        }
+
+        /* shipping and exchange offer style */
+        #shippingContainer {
+
+            margin: 2rem auto;
+            background: rgb(35, 21, 53)
+        }
+
+        #shippingContainer>div {
+
+            width: 80%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(2, 500px);
+            justify-content: space-evenly;
+
+
+
+
+
+        }
+
+        #ship,
+        #money-Back,
+        #lifeTime-Exchange,
+        #warranty {
+            display: flex;
+            gap: 2rem;
+
+            margin: 2rem auto;
+        }
+
+        #lifeTime-Exchange,
+        #warranty {
+            margin: 2rem;
+        }
+
+        #ship span {
+            width: 123px;
+            height: 123px;
+            display: block;
+            cursor: pointer;
+            background: url(https://assets.cltstatic.com/images/responsive/spriteImage2.png) -45px -58px / 832px no-repeat;
+            margin: 0px auto;
+        }
+
+        #money-Back span {
+            width: 104px;
+            height: 104px;
+            display: block;
+            cursor: pointer;
+            background: url(https://assets.cltstatic.com/images/responsive/spriteImage2.png) -464px -66px / 832px no-repeat;
+            margin: 0px auto;
+        }
+
+        #lifeTime-Exchange span {
+            width: 120px;
+            height: 120px;
+            display: block;
+            cursor: pointer;
+            background: url(https://assets.cltstatic.com/images/responsive/spriteImage2.png) -245px -65px / 832px no-repeat;
+            margin: 0px auto;
+        }
+
+        #warranty span {
+            width: 103px;
+            height: 90px;
+            display: block;
+            cursor: pointer;
+            background: url(https://assets.cltstatic.com/images/responsive/spriteImage2.png) -670px -61px / 832px no-repeat;
+            margin: 0px auto;
+        }
+
+        #ship>div:nth-child(2)>p:nth-child(1),
+        #money-Back>div:nth-child(2)>p:nth-child(1),
+        #lifeTime-Exchange>div:nth-child(2)>p:nth-child(1),
+        #warranty>div:nth-child(2)>p:nth-child(1) {
+            color: white;
+
+        }
+
+        #ship>div:nth-child(2)>p:nth-child(2),
+        #money-Back>div:nth-child(2)>p:nth-child(2),
+        #lifeTime-Exchange>div:nth-child(2)>p:nth-child(2),
+        #warranty>div:nth-child(2)>p:nth-child(2) {
+            color: rgb(196, 173, 225);
+            font-size: 1.2rem;
+
+        }
+
+        #cs-review {
+            /* background-color: rgb(35, 21, 53); */
+            color: black;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        #cs-review>div:nth-child(1) {
+            text-align: center;
+        }
+
+        #cs-review>div:nth-child(1)>img {
+            background-color: rgb(35, 21, 53);
+        }
+
+        #cs-review>div:nth-child(1)>img:hover {
+            cursor: pointer;
+        }
+
+        #cs-review>div {
+            width: 70%;
+            margin: auto;
+            text-align: center;
+        }
+
+        #cs-review>div:nth-child(2) {
+            height: 350px;
+        }
+
+        #cs-review>div>p {
+            font-size: 2rem;
+        }
+
+        /* dots */
+        #dots {
+            width: 100%;
+            position: absolute;
+            bottom: 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 5px solid gray;
+        }
+
+        #dots label {
+            width: 15px;
+            height: 15px;
+            background: #fff;
+            margin: 0 10px;
+            border-radius: 50%;
+            opacity: 0.3;
+            cursor: pointer;
+            border: 5px solid red;
+        }
+
+        /* <!-- shop our Instagram and 7 images --> */
+        .instagramShopTextHeading {
+            margin: 3rem !important;
+        }
+
+        .instagramshopRight {
+            border: none !important;
+            font-size: 1.5rem;
+        }
+
+        /* images -----7 */
+        #instaImages {
+            width: 95%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1.5fr 2fr;
+            float: none;
+
+        }
+
+        #instaImages>div:nth-child(1)>img {
+            max-width: 100%;
+
+            transition: transform 0.3s ease-in-out 0s;
+            height: 100%;
+
+        }
+
+        #instaImages>div:nth-child(1)>img:hover,
+        #instaImages>div:nth-child(2)>img:hover {
+            cursor: pointer;
+            transform: scale(1.020);
+
+
+        }
+
+        #instaImages>div:nth-child(2) {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            overflow: hidden;
+        }
+
+        #instaImages>div:nth-child(2)>img {
+
+            max-width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease-in-out 0s;
+        }
+
+        .signImage {
+            background: url(https://assets.cltstatic.com/images/responsive/spriteImage2.png) -13px -1268px / 832px no-repeat;
+            width: 125px;
+            height: 68px;
+            display: inline-block;
+        }
+
+        #spirit-CaratLane>h1 {
+            color: white;
+        }
+
+        form {
+            font-size: 1rem;
+            color: white;
+        }
+
+        form>div:nth-child(1) {
+            margin-bottom: 1rem;
+        }
+
+        form>div+div {
+            margin: 2rem 1rem;
+            color: white;
+            display: inline;
+        }
+
+        #formNewArrival>h1 {
+            color: white;
+        }
+
+        form>div>input:nth-child(2) {
+            background: linear-gradient(to right,
+                    rgb(222, 87, 229),
+                    rgb(136, 99, 251));
+            padding: 0.4rem 1.5rem;
+            border-left: 3px;
+            color: white;
+        }
+
+        form>div>input:nth-child(2):hover {
+            cursor: pointer;
+        }
+
+        #formNewArrival>p {
+            color: rgb(136, 99, 251);
+        }
+
+        /* <!-- Online Jewellery Store , || CaratLane’s Vision, || <Shopping at CaratLane --> */
+
+        #onlinePromotion {
+            width: 95%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        #onlinePromotion>div {
+            padding: 1.5rem 1rem;
+        }
+
+        #onlinePromotion h2 {
+            font-size: 1.2rem;
+        }
+
+        #onlinePromotion p {
+            font-size: 0.9rem;
+
+        }
+
+        footer {
+            background-color: rgb(246, 239, 246)
+        }
+
+        #footer-section {
+            width: 80%;
+            margin: auto;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        #footer-section>div {
+            font-size: 0.8rem;
+        }
+
+        #footer-section>div>p {
+            color: rgb(135, 118, 157);
+        }
+
+        #footer-section>div>p:hover {
+            cursor: pointer;
+
+        }
+
+        #footer-section>div>p>i {
+            margin-left: 1rem;
+            color: black;
+            font-size: 1.2rem;
+        }
+
+        #user-login>a,
+        #shop-cart>a {
+            color: black;
+        }
+
+        form input:focus {
+            outline: none;
+        }
+
+        @media screen and (max-width:1850px) {
+            #nav-right>div {
+                padding: 0 0.5rem;
+            }
+        }
+
+        @media screen and (max-width:1520px) {
+            #nav-right>div {
+                padding: 0 0.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section id="navbar">
+        <div id="top-nav">Introducing CaratLane PoP! Plan your purchase</div>
+        <main>
+            <div id="nav-left">
+                <a href="index.html"><img src="img-index/logo.png" alt="Logo" /></a>
+                <div>
+                    <i class="fa-solid fa-house-user"></i>
+                    <a href="#">FREE TRY AT HOME</a>
+                </div>
+                <div>
+                    <i class="fa-sharp fa-solid fa-shop"></i> <a href="#">FIND STORE</a>
+                </div>
+                <div>
+                    <i class="fa-sharp fa-solid fa-briefcase"> </i>
+                    <a href="#">PLAN OF PURCHASE</a>
+                </div>
+                <div>
+                    <i class="fa-solid fa-coins"></i><a href="#">BUY DIGITAL GOLD </a>
+                </div>
+            </div>
+
+            <!-- right nav -->
+            <div id="nav-right">
+                <form>
+                    <input type="text" placeholder="search" /><i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+                </form>
+
+                <p><i class="fa-solid fa-location-dot"></i> pincode</p>
+
+                <div>
+                    <img src="https://www.mapsofindia.com/maps/india/india-flag.jpg" alt="Indian flag" />
+                </div>
+
+                <div id="user-login">
+                    <a href="signup-page.html"><i class="fa-solid fa-user"></i></a>
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <div id="shop-cart">
+                    <a href="cartPage.html" target="_blank"><i class="fa-solid fa-cart-shopping"></i></a>
+                </div>
+            </div>
+        </main>
+
+        <!-- bottom Navbar -->
+        <nav>
+            <div><a href="All product page.html" target="_blank">NEW ARRIVALS</a></div>
+            <div><a href="#">RINGS</a></div>
+            <div><a href="#">EARRINGS</a></div>
+            <div><a href="#">BRACELETS &amp; BANGLES</a></div>
+            <div><a href="#">SOLITAIRES</a></div>
+            <div><a href="#">MANGALSUTRA</a></div>
+            <div><a href="#">READY TO SHIP</a></div>
+            <div><a href="#">KIDS</a></div>
+            <div><a href="#">OTHER JEWELLERY</a></div>
+            <div><a href="#">GIFTING</a></div>
+        </nav>
+    </section>
+
+    <section id="mid-images">
+        <div>
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2023/CL/01-JAN/AppBanner/Blaze/01/Desktop_1920x694.jpg"
+                alt="images" />
+        </div>
+    </section>
+    <div id="shaya-images">
+        <div>
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2022/Shaya/10_OCT/11_10_2022/Revised/Responsive-Banner.jpg"
+                alt="image" />
+        </div>
+        <div>
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2023/CL/01-JAN/HP-Banner/JustArrived/1X.jpg"
+                alt="" />
+        </div>
+        <div>
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2023/CL/01-JAN/AppBanner/Festive/01/2X.jpg"
+                alt="" />
+        </div>
+    </div>
+
+    <!-- six images of gold rings -->
+    <div id="rings">
+        <div>
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2022/CL/12-DEC/HP-Banner/6tile/01/Desktop_5.jpg"
+                alt="" />
+        </div>
+        <div>
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2022/CL/12-DEC/HP-Banner/6tile/01/Desktop_1.jpg"
+                alt="" />
+        </div>
+        <div>
+            <img src="	https://cdn.caratlane.com/media/static/images/V4/2022/CL/12-DEC/HP-Banner/6tile/01/Desktop_2.jpg"
+                alt="" />
+        </div>
+        <div>
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2022/CL/12-DEC/HP-Banner/6tile/01/Desktop_7.jpg"
+                alt="" />
+        </div>
+        <div>
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2022/CL/12-DEC/HP-Banner/6tile/01/Desktop_6.jpg"
+                alt="" />
+        </div>
+        <div>
+            <img src="	https://cdn.caratlane.com/media/static/images/V4/2022/CL/12-DEC/HP-Banner/6tile/01/Desktop_3.jpg"
+                alt="" />
+        </div>
+    </div>
+
+    <!-- three view all collection images -->
+    <div id="collection">
+        <div>
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2022/CL/12-DEC/HP-Banner/Collection/02/Collection_Borla.jpg"
+                alt="" />
+        </div>
+        <div>
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2022/CL/12-DEC/HP-Banner/Collection/02/Collection_Mogra.jpg"
+                alt="" />
+            <div id="collection-btn">
+                <button>View All Collections</button>
+            </div>
+        </div>
+        <div>
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2022/CL/12-DEC/HP-Banner/Collection/02/Collection_Harmony.jpg"
+                alt="" />
+        </div>
+    </div>
+
+    <!-- location images and discount and sale -->
+
+    <section id="sale-Images">
+        <div>
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2022/CL/12-DEC/AppBanner/Personal/03/2X.jpg"
+                alt="" />
+        </div>
+        <div>
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2023/CL/01-JAN/AppBanner/Offer/02/2x.jpg"
+                alt="" />
+        </div>
+        <div>
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2023/CL/01-JAN/HP-Banner/RTS/2x.gif" alt="" />
+        </div>
+        <div>
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2023/CL/01-JAN/AppBanner/Sale/01/2x.gif"
+                alt="" />
+        </div>
+    </section>
+
+    <!-- section exchange text and images -->
+    <section id="exchange-title">
+        <div id="exchange-heading">
+            <div>
+                <img src="https://cdn.caratlane.com/media/static/images/V4/2022/CL/11-NOV/Others/13/OLD-GOLD_.png"
+                    alt="" />
+            </div>
+            <div>
+                <h1>Your precious gold. Our new designs!</h1>
+                <span class="line-1"></span>
+                <span class="line-2"></span>
+                <p>
+                    - A Gold Exchange Program that lets you preserve your memories and
+                    make new ones! Please note: The old gold doesn’t have to be from
+                    only CaratLane, it can be any gold jewellery you have.
+                </p>
+                <button>Know More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- spirit of CaratLane -->
+
+    <section id="spirit-CaratLane-title">
+        <div id="spirit-CaratLane">
+            <img src="https://images.cltstatic.com/live-images/c656a495c4564a4c8ac8a1f5dee414bd.png" alt="" />
+            <p>
+                The highest quality of craftsmanship and innovation, that brings you
+                modern, everyday designs.
+            </p>
+            <button class="btn">Know More</button>
+        </div>
+    </section>
+
+    <!-- product title -->
+    <section id="cartLane-product-heading">
+        <div id="product-heading-left">
+            <h2>Best of CartLane</h2>
+            <span class="line-1"></span>
+            <span class="line-2"></span>
+        </div>
+        <div id="product-heading-right"><span>Women</span><span>Men</span></div>
+    </section>
+
+    <!-- product display -->
+
+    <section id="product-display"></section>
+
+    <!-- shiping container and exchange offers  -->
+    <section id="shippingContainer">
+        <div>
+            <!-- 1 row -->
+            <div id="ship">
+                <div>
+                    <span></span>
+                </div>
+                <div>
+                    <p>100% Certified & Free Shipping</p>
+                    <p>Our jewellery always comes with a certificate of authentication.</p>
+                </div>
+            </div>
+            <!-- 2 -->
+            <div id="money-Back">
+                <div>
+                    <span></span>
+                </div>
+                <div>
+                    <p>15 Day Money-Back</p>
+                    <p>Get 100% refund if you don't like your jewellery.</p>
+                </div>
+            </div>
+            <!-- 3 -->
+            <div id="lifeTime-Exchange">
+                <div>
+                    <span></span>
+                </div>
+                <div>
+                    <p>Lifetime Exchange</p>
+                    <p>Exchange your old designs anytime you want an upgrade.</p>
+                </div>
+            </div>
+            <!-- 4 -->
+            <div id="warranty">
+                <div>
+                    <span></span>
+                </div>
+                <div>
+                    <p>One Year Replacement Warranty</p>
+                    <p>If your jewellery has a defect, we will fix it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- customer message -->
+    <section id="cs-review">
+        <div><img src="img-index/instagram logo.png" alt="" /></div>
+        <div>
+            <p>
+                “I got this necklace as my wedding gift and instantly loved it. It is
+                literally the only accessory I wore on my entire honeymoon. I love how
+                delicate and beautiful it is.”
+            </p>
+            <p>- Tanya Gupta via Instagram</p>
+        </div>
+        <button class="btn">Read More</button>
+        <div>
+            <input type="radio" name="dot-text" checked />
+            <input type="radio" name="dot-text" />
+            <input type="radio" name="dot-text" />
+        </div>
+    </section>
+
+    <!-- shop our Instagram and 7 images -->
+    <section id="cartLane-product-heading" class="instagramShopTextHeading">
+        <div id="product-heading-left">
+            <h2>Shop Our Instagram</h2>
+            <span class="line-1"></span>
+            <span class="line-2"></span>
+        </div>
+        <div id="product-heading-right" class="instagramshopRight">
+            <p>#MyCaratLaneStory</p>
+        </div>
+    </section>
+
+    <!-- 7 images  -->
+    <section id="instaImages">
+        <div>
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2022/CL/10-OCT/Others/insta/image1.jpg"
+                alt="Images" />
+        </div>
+        <div>
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2022/CL/10-OCT/Others/insta/image2.jpg"
+                alt="images" />
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2022/CL/10-OCT/Others/insta/Image4.jpg"
+                alt="images" />
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2022/CL/10-OCT/Others/insta/Image5.jpg"
+                alt="images" />
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2022/CL/10-OCT/Others/insta/image3.jpg"
+                alt="images" />
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2022/CL/10-OCT/Others/insta/Image6.jpg"
+                alt="images" />
+            <img src="https://cdn.caratlane.com/media/static/images/V4/2022/CL/10-OCT/Others/insta/image7.jpg"
+                alt="images" />
+        </div>
+    </section>
+
+    <!-- sign up for new Arrival -->
+    <section id="spirit-CaratLane-title">
+        <div id="spirit-CaratLane" class="newArrival">
+            <span class="signImage"></span>
+            <div id="formNewArrival">
+                <h1>Sign up to be a CaratLane Insider</h1>
+                <form>
+                    <div><input type="email" required /><input type="submit" /></div>
+                    <div><input type="radio" name="gender" required /> FeMale</div>
+                    <div><input type="radio" name="gender" required /> Male</div>
+                    <div><input type="radio" name="gender" required /> Other</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Online Jewellery Store , || CaratLane’s Vision, || <Shopping at CaratLane -->
+    <section id="onlinePromotion">
+        <!-- Online Jewellery Store -->
+        <div id="OnlineJewelleryStore">
+            <h2>Online Jewellery Store</h2>
+            <span class="line-1"></span><span class="line-2"></span>
+            <p>
+                CaratLane.com began in 2008 with the simple motto of democratising
+                jewellery. And today, after 13 glorious years, it has come to be
+                recognised as one of the top 20 e-commerce portals in India. Steadily
+                growing from strength to strength since inception, CaratLane has also
+                established 165 stores across the length and breadth of India.
+            </p>
+            <p>
+                Since July 2016, we joined forces with India’s most desired and
+                largest jewellery brand, Tanishq, through a strategic investment made
+                by Titan Company in CaratLane. This takes us another step closer to
+                achieving our shared mission - to make beautiful jewellery accessible
+                to everyone.
+            </p>
+        </div>
+
+        <!-- 2 -->
+
+        <div id="CaratLaneVision">
+            <h2>CaratLane’s Vision</h2>
+            <span class="line-1"></span><span class="line-2"></span>
+            <p>
+                CaratLane works with the vision of offering tastefully designed
+                jewellery at revolutionary prices. This is achieved by eliminating all
+                inefficiencies which result in drastically reduced costs. With
+                CaratLane, users stand to save as much as 30% when compared to prices
+                in the market.
+            </p>
+            <p>
+                Our app is designed to bridge the vast gap between the virtual and the
+                physical world. This has been attained with the help of the Virtual
+                Try-on feature that permits the users to virtually put on 1000s of
+                earrings to see just how they look when placed on the ears.
+            </p>
+            <p>
+                With over 100 thousand downloads, the CaratLane app has emerged to be
+                one of the most liked applications in the jewellery circuit.
+            </p>
+        </div>
+
+        <!-- 3 -->
+        <div id="ShoppingAtCaratLane">
+            <h2>Shopping at CaratLane</h2>
+            <span class="line-1"></span><span class="line-2"></span>
+            <p>
+                Placing security first, CaratLane ensures that every transaction made
+                on the site is safe and smooth for the customers. To attain this, the
+                company follows stern policies of transparency through the whole
+                customer buying journey.
+            </p>
+            <p>
+                For further convenience, all CaratLane products come backed with
+                certification from international laboratories, and a blanket
+                15-day-return policy, no questions asked.
+            </p>
+            <p>
+                CaratLane provides the exquisite craftsmanship of beautiful jewellery
+                designs such as rings, earrings, pendants, necklace, chains, bangles,
+                bracelets, mangalsutra, nose pins. Apart from jewellery, CaratLane
+                offers 22k (916) and 24k (995) gold coins with certification and the
+                guarantee of a BIS Hallmarked stamp.
+            </p>
+        </div>
+    </section>
+
+    <!-- footer section -->
+    <footer>
+        <section id="footer-section">
+            <!-- 1 -->
+            <div>
+                <h2>Know Your Jewellery</h2>
+                <p>DIAMOND GUIDE</p>
+                <p>JEWELLERY GUIDE</p>
+                <p>GEMSTONES GUIDE</p>
+                <p>GOLD RATE</p>
+                <p>DIGITAL GOLD</p>
+            </div>
+
+            <!-- 2 -->
+            <div>
+                <h2>CaratLane Advantage</h2>
+                <p>15-DAY RETURNS</p>
+                <p>FREE SHIPPING</p>
+                <p>FINANCING OPTIONS</p>
+                <p>OLD GOLD EXCHANGE</p>
+            </div>
+
+            <!-- 3 -->
+
+            <div>
+                <h2>Customer Service</h2>
+                <p>RETURN POLICY</p>
+                <p>ORDER STATUS</p>
+            </div>
+
+            <!-- 4 -->
+            <div>
+                <h2>About Us</h2>
+                <p>OUR STORY</p>
+                <p>PRESS</p>
+                <p>BLOG</p>
+                <p>CAREERS</p>
+            </div>
+
+            <!-- 5 -->
+            <div>
+                <h2>Contact Us</h2>
+                <p><i class="fa-solid fa-phone"></i><i class="fa-solid fa-comments"></i><i
+                        class="fa-brands fa-whatsapp"></i></p>
+                <p>24X7 Enquiry Support ( ALL Days )</p>
+                <p>General:</p>
+                <p><a href="#">Contactus@Caratlane.Com</a></p>
+                <p>Corporate:<a href="#">B2B@Caratlane.Com</a></p>
+                <p>HR:<a href="#">Careers@Caratlane.Com</a></p>
+                <p>Grievance:<a href="#">Contactus@Caratlane.Com</a></p>
+            </div>
+        </section>
+    </footer>
+</body>
+<script src="https://kit.fontawesome.com/cbfe85fe31.js" crossorigin="anonymous"></script>
+<script>
+    let productDisplay = document.querySelector("#product-display");
+    let productheadingSpan = document.querySelectorAll("#product-heading-right>span");
+    let csReview = document.querySelector("#cs-review");
+
+
+
+    let arr =
+        [{
+            id: 1,
+            image: "https://cdn.caratlane.com/media/catalog/product/U/T/UT00168-YG0000_1_lar.jpg",
+            discountPrice: 8359,
+            actualPrice: 8868,
+            description: "Ornate Om Baby Nazaria Gold Bracelet"
+        },
+
+        {
+            id: 2,
+            image: "https://cdn.caratlane.com/media/catalog/product/U/T/UT00167-YG0000_1_lar.jpg",
+            discountPrice: 7855,
+            actualPrice: 8365,
+            description: "Swastik Baby Nazaria Gold Bracelet"
+        },
+
+        {
+            id: 3,
+            image: "https://cdn.caratlane.com/media/catalog/product/J/E/JE03938-YGP600_1_lar.jpg",
+            discountPrice: 8421,
+            actualPrice: 10527,
+            description: "Trillium Diamond Stud Earrings"
+        },
+
+        {
+            id: 4,
+            image: "https://cdn.caratlane.com/media/catalog/product/J/E/JE06187-1RP600_1_lar.jpg",
+            discountPrice: 9396,
+            actualPrice: 11744,
+            description: "Quad Geometric Diamond Stud Earrings"
+        },
+
+        {
+            id: 5,
+            image: "https://cdn.caratlane.com/media/catalog/product/cache/6/image/480x480/9df78eab33525d08d6e5fb8d27136e95/J/T/JT02084-1YP900_11_listfront.jpg",
+            discountPrice: 8702,
+            actualPrice: 10237,
+            description: "Delicate Quad Diamond Bracelet"
+        },
+
+        {
+            id: 6,
+            image: "https://cdn.caratlane.com/media/catalog/product/U/E/UE04499-1Y0000_1_lar.jpg",
+            discountPrice: 5800,
+            actualPrice: 6243,
+            description: "Magical Unicorn Kids' Gold Earrings"
+        },
+
+
+        {
+            id: 7,
+            image: "https://cdn.caratlane.com/media/catalog/product/J/N/JN00048-YGP900_1_lar.jpg",
+            discountPrice: 7111,
+            actualPrice: 7901,
+            description: "Isha Delight Diamond Nose Pin"
+        },
+
+
+
+
+
+        {
+            id: 8,
+            image: "https://cdn.caratlane.com/media/catalog/product/U/P/UP00899-1Y0000_1_lar.jpg",
+            discountPrice: 7586,
+            actualPrice: 7895,
+            description: "Fashionable Evil Eye Gold Pendant"
+        },
+
+
+        {
+            id: 9,
+            image: "https://cdn.caratlane.com/media/catalog/product/U/T/UT00684-1Y0000_1_lar.jpg",
+            discountPrice: 7191,
+            actualPrice: 7500,
+            description: "Infinity Love Adjustable Gold Bracelet"
+        },
+
+
+        {
+            id: 10,
+            image: "https://cdn.caratlane.com/media/catalog/product/U/T/UT00702-1Y0000_1_lar.jpg",
+            discountPrice: 6692,
+            actualPrice: 7799,
+            description: "Chopper Personalised Kids' Gold Bracelet"
+        },
+
+
+        {
+            id: 11,
+            image: "https://cdn.caratlane.com/media/catalog/product/U/P/UP00058-YG0000_1_lar.jpg",
+            discountPrice: 6319,
+            actualPrice: 7169,
+            description: "Daddy's Princess Kids' Gold Pendant"
+        },
+
+        {
+            id: 12,
+            image: "https://cdn.caratlane.com/media/catalog/product/U/E/UE04784-YG0000_1_lar.jpg",
+            discountPrice: 9449,
+            actualPrice: 9789,
+            description: "Saima Cutout Gold Drop Earrings"
+        },
+
+        {
+            id: 13,
+            image: "https://cdn.caratlane.com/media/catalog/product/U/T/UT00842-1Y0000_1_lar.jpg",
+            discountPrice: 7643,
+            actualPrice: 8673,
+            description: "Butterflies Baby Nazaria Gold Bracelet"
+        },
+
+
+        {
+            id: 14,
+            image: "https://cdn.caratlane.com/media/catalog/product/U/E/UE04655-1Y0000_6_lar.jpg",
+            discountPrice: 5635,
+            actualPrice: 6078,
+            description: "Enchanted Unicorn Kids' Gold Earrings"
+        },
+
+        {
+            id: 15,
+            image: "https://cdn.caratlane.com/media/catalog/product/U/R/UR00681-1Y0000_1_lar.jpg",
+            discountPrice: 9862,
+            actualPrice: 10233,
+            description: "Love Cursive Gold Ring"
+        },
+        {
+            id: 16,
+            image: "https://cdn.caratlane.com/media/catalog/product/U/E/UE04784-YG0000_1_lar.jpg",
+            discountPrice: 9449,
+            actualPrice: 9789,
+            description: "Saima Cutout Gold Drop Earrings"
+        }
+        ];
+
+    displayProduct(arr);
+
+    function displayProduct(data) {
+        productDisplay.innerHTML = "";
+        data.forEach((element) => {
+            let div1 = document.createElement("div");
+            let div2 = document.createElement("div");
+            let div3 = document.createElement("div");
+            let anchorTag = document.createElement("a")
+            div2.classList.add("product-img");
+            div3.classList.add("product-text");
+            let image = document.createElement("img");
+            let price = document.createElement("h3");
+            let priceDiscount = document.createElement("h2");
+            let description = document.createElement("p");
+
+            priceDiscount.classList.add("neglect-price");
+            anchorTag.setAttribute("href", "productPage.html")
+            image.setAttribute("src", element.image);
+            price.innerText = `₹ ${element.actualPrice}`;
+            priceDiscount.innerText = `₹ ${element.discountPrice}`;
+            description.innerText = element.description;
+            div2.append(image);
+            div3.append(price, priceDiscount, description);
+            div1.append(div2, div3);
+            anchorTag.append(div1)
+            productDisplay.append(anchorTag);
+
+            // when Some click on product for showing product in a new page
+            anchorTag.addEventListener("click", () => {
+
+                localStorage.setItem("selectedProduct", JSON.stringify(element))
+            })
+
+
+        });
+    }
+
+    // man women hover effect
+    productheadingSpan.forEach((element) => {
+        element.addEventListener("mouseover", () => {
+            element.style.background = "";
+            element.style.background = `linear-gradient(to right, rgb(222, 87, 229), rgb(136, 99, 251))`;
+        });
+        element.addEventListener("mouseout", () => {
+            element.style.background = "";
+        });
+    });
+
+    // cs Review section
+    let csReviewDiv = document.querySelector("#cs-review>div:nth-child(2)");
+    let inputs = document.querySelectorAll("#cs-review input");
+
+    function displayTextSlider(index) {
+        let csReviwArr = [
+            {
+                name: `- Tanya Gupta via Instagram`,
+                review: ` “I got this necklace as my wedding gift and instantly loved it. It is literally the only accessory I wore on my entire honeymoon. I love how delicate and beautiful it is.”`,
+            },
+            {
+                name: `- Shilpa Praveen via Instagram`,
+                review: `”The six of us wanted to celebrate our year of togetherness with something which will stay with us forever. So, all of us bought this beautiful ring which is the perfect symbol of our friendship and is just so classy!”`,
+            },
+            {
+                name: `- Pooja Rajpoot via Instagram`,
+                review: `”My fiance wanted to give me something classic and unique. He searched everywhere, literally half of the Chandigarh for the unique design. Our search was complete when we entered CaratLane store. My fiance selected the diamond and I selected the design. I love it because it is designed just for me.”`,
+            }
+
+        ];
+
+        csReviewDiv.innerHTML = "";
+        if (index === 3) index = 0;
+        let review = document.createElement("p");
+        let csName = document.createElement("p");
+        review.innerText = `${csReviwArr[index].review}`;
+        csName.innerText = `${csReviwArr[index].name}`;
+        inputs[index].checked = true;
+        csReviewDiv.append(review, csName);
+    }
+
+    let index = 1;
+    setInterval(() => {
+        if (index === 3) index = 0;
+        displayTextSlider(index);
+        index++;
+    }, 5000);
+
+    // for clicking check box
+    inputs.forEach((element, i) => {
+        element.addEventListener("click", () => {
+            displayTextSlider(i);
+        });
+    });
+
+    // new Arrival form submitting---------------
+    let newArrivalForm = document.querySelector("#formNewArrival>form");
+    let formNewArrival = document.querySelector("#formNewArrival");
+    newArrivalForm.addEventListener("submit", () => {
+        event.preventDefault();
+        formNewArrival.innerHTML = "";
+        let h2Thank = document.createElement("h1");
+        let paraNotified = document.querySelector("p");
+        h2Thank.innerText = `Thanks for Signing Up!`;
+        paraNotified.innerText = `You'll be the first one to know about our new arrivals, amazing offers and everything else!`;
+        formNewArrival.append(h2Thank, paraNotified);
+    });
+
+
+    
+  
+
+
+</script>
+
+</html>

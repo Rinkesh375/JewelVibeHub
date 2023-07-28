@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CartLane </title>
+</head>
+
+<body>
+    <style>
+        body {
+            /* box-sizing: border-box; */
+            padding: 0;
+            margin: 0;
+        }
+
+        #navbar {
+            position: fixed;
+            width: 100%;
+            top: 0px;
+            background-color: white;
+        }
+
+        #top-nav {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 3px 0px;
+        }
+
+        #top-nav+main {
+            box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+            height: 70px;
+        }
+
+        #nav-left {
+            width: 60%;
+            float: left;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        #nav-left a {
+            font-size: 0.8rem;
+            text-decoration: none;
+            color: #4f3267;
+        }
+
+        #nav-left a:hover {
+            color: rgb(214, 85, 85);
+            text-decoration: underline;
+        }
+
+        #nav-left>a>img {
+            padding: 0 1rem;
+        }
+
+        #nav-right {
+            height: 60px;
+            width: 38%;
+            float: right;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #nav-right img {
+            width: 100%;
+            height: 33px;
+            border-radius: 50%;
+        }
+
+        #nav-right>div {
+            padding: 0 1rem;
+        }
+
+        form .fa-sharp {
+            background: linear-gradient(to right,
+                    rgb(222, 87, 229),
+                    rgb(136, 99, 251));
+            color: white;
+            padding: 0.4rem 1rem 0.5rem 1rem;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        form input {
+            border-right: none;
+            padding: 0.3rem 1rem;
+        }
+
+        form input:focus {
+            outline: none;
+        }
+
+        nav {
+            height: 22px;
+
+            display: flex;
+            padding: 0.7rem 0px;
+            justify-content: center;
+            align-items: center;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+        nav>div {
+            margin: 0px 1.5rem;
+
+            padding: 0.5rem 0px;
+            position: relative;
+        }
+
+        form .fa-sharp:hover {
+            cursor: pointer;
+        }
+
+        nav>div>a {
+            text-decoration: none;
+            font-size: 0.7rem;
+            color: black;
+        }
+
+        nav>div::after {
+            transition: all 1s linear;
+            /* border-image: ; */
+        }
+
+        nav>div:hover {
+            border-bottom: 2px solid rgb(222, 87, 229);
+            text-shadow: 2px 10px 20px rgb(222, 87, 229);
+        }
+
+
+
+
+        #user-login i:hover {
+            cursor: pointer;
+            border-bottom: 2px solid rgb(222, 87, 229);
+        }
+
+        #user-login>a,
+        #shop-cart>a {
+            color: black;
+        }
+
+        /* product with filter start here */
+        #sort,
+        #cartegory {
+
+            width: 70%;
+            height: 3rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+
+        #filter {
+
+            width: 70%;
+            height: 3rem;
+            margin: auto auto;
+
+        }
+
+        #filter>input {
+            width: 38%;
+            padding: 0.5rem 0px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: bold;
+
+        }
+
+        #filter>button {
+            width: 18%;
+            padding: 0.6rem;
+            background: linear-gradient(to right, #de57e5, #8863fb);
+            border: none;
+            border-radius: 5px;
+            color: white;
+
+        }
+
+        #productFilter {
+            margin-top: 10rem;
+            display: grid;
+            grid-template-columns: 2fr 6fr;
+        }
+
+        #productFilter>div:nth-child(1) {
+            text-align: center;
+        }
+
+
+        /* product display start here */
+
+        #product-display {
+            width: 95%;
+            margin: 0px auto 0px auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            align-items: center;
+            gap: 2rem;
+        }
+
+        #product-display>a {
+            color: black;
+        }
+
+
+        #product-display>a>div:hover {
+            cursor: pointer;
+
+        }
+
+        #product-display>a {
+            text-decoration: none;
+        }
+
+
+        .product-img {
+            box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+                rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+            width: 100%;
+
+        }
+
+        .product-text {
+            padding: 0px 1rem;
+            margin-top: 1rem;
+        }
+
+        .product-text>h2,
+        .product-text>h3 {
+            display: inline;
+            margin: 2rem 1rem 0px 0px;
+        }
+
+        .product-text>h3 {
+            text-decoration: line-through;
+            font-size: 1rem;
+        }
+
+
+        #product-display img {
+            width: 100%;
+            height: 350px;
+        }
+
+        #product-display>a {}
+
+        /* footer start here */
+
+
+        footer {
+            margin-top: 3rem;
+            background-color: rgb(246, 239, 246)
+        }
+
+        #footer-section {
+            width: 80%;
+            margin: auto;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        #footer-section>div {
+            font-size: 0.8rem;
+        }
+
+        #footer-section>div>p {
+            color: rgb(135, 118, 157);
+        }
+
+        #footer-section>div>p:hover {
+            cursor: pointer;
+
+        }
+
+        #footer-section>div>p>i {
+            margin-left: 1rem;
+            color: black;
+            font-size: 1.2rem;
+        }
+
+        /* footer end here */
+    </style>
+    </head>
+
+    <body>
+        <section id="navbar">
+            <div id="top-nav">Introducing CaratLane PoP! Plan your purchase</div>
+            <main>
+                <div id="nav-left">
+                    <a href="index.html"><img src="img-index/logo.png" alt="Logo" /></a>
+                    <div>
+                        <i class="fa-solid fa-house-user"></i>
+                        <a href="#">FREE TRY AT HOME</a>
+                    </div>
+                    <div>
+                        <i class="fa-sharp fa-solid fa-shop"></i> <a href="#">FIND STORE</a>
+                    </div>
+                    <div>
+                        <i class="fa-sharp fa-solid fa-briefcase"> </i>
+                        <a href="#">PLAN OF PURCHASE</a>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-coins"></i><a href="#">BUY DIGITAL GOLD </a>
+                    </div>
+                </div>
+
+                <!-- right nav -->
+                <div id="nav-right">
+                    <form class="searchForm">
+                        <input type="text" placeholder="search" /><i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+                    </form>
+
+                    <p><i class="fa-solid fa-location-dot"></i> pincode</p>
+
+                    <div>
+                        <img src="https://www.mapsofindia.com/maps/india/india-flag.jpg" alt="Indian flag" />
+                    </div>
+
+                    <div id="user-login">
+                        <a href="signup-page.html"><i class="fa-solid fa-user"></i></a>
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <div id="shop-cart">
+                        <a href="cartPage.html"><i class="fa-solid fa-cart-shopping"></i></a>
+                    </div>
+                </div>
+            </main>
+
+            <!-- bottom Navbar -->
+            <nav>
+                <div><a href="#">NEW ARRIVALS</a></div>
+                <div><a href="#">RINGS</a></div>
+                <div><a href="#">EARRINGS</a></div>
+                <div><a href="#">BRACELETS &amp; BANGLES</a></div>
+                <div><a href="#">SOLITAIRES</a></div>
+                <div><a href="#">MANGALSUTRA</a></div>
+                <div><a href="#">READY TO SHIP</a></div>
+                <div><a href="#">KIDS</a></div>
+                <div><a href="#">OTHER JEWELLERY</a></div>
+                <div><a href="#">GIFTING</a></div>
+            </nav>
+        </section>
+
+        <!-- product display -->
+
+        <section id="productFilter">
+            <div>
+                <select id="sort">
+                    <option value="">Sort By Price</option>
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+
+                <!-- sorting by category -->
+                <select id="cartegory">
+                    <option value="">Sort By Category </option>
+                    <option value="Chain">Chain</option>
+                    <option value="Bracelet">Bracelet</option>
+                    <option value="Earnings">Earnings</option>
+                    <option value="Necklace">Necklace</option>
+                    <option value="Gold Coin">Gold Coin</option>
+
+                </select>
+
+                <!-- filter -->
+
+                <div id="filter">
+                    <input type="number" id="lower" placeholder="min" />
+                    <input type="number" id="upper" placeholder="max" />
+                    <button id="filter-btn">Filter</button>
+                </div>
+            </div>
+            <div id="product-display"></div>
+        </section>
+
+        <!-- footer section -->
+        <footer>
+            <section id="footer-section">
+                <!-- 1 -->
+                <div>
+                    <h2>Know Your Jewellery</h2>
+                    <p>DIAMOND GUIDE</p>
+                    <p>JEWELLERY GUIDE</p>
+                    <p>GEMSTONES GUIDE</p>
+                    <p>GOLD RATE</p>
+                    <p>DIGITAL GOLD</p>
+                </div>
+
+                <!-- 2 -->
+                <div>
+                    <h2>CaratLane Advantage</h2>
+                    <p>15-DAY RETURNS</p>
+                    <p>FREE SHIPPING</p>
+                    <p>FINANCING OPTIONS</p>
+                    <p>OLD GOLD EXCHANGE</p>
+                </div>
+
+                <!-- 3 -->
+
+                <div>
+                    <h2>Customer Service</h2>
+                    <p>RETURN POLICY</p>
+                    <p>ORDER STATUS</p>
+                </div>
+
+                <!-- 4 -->
+                <div>
+                    <h2>About Us</h2>
+                    <p>OUR STORY</p>
+                    <p>PRESS</p>
+                    <p>BLOG</p>
+                    <p>CAREERS</p>
+                </div>
+
+                <!-- 5 -->
+                <div>
+                    <h2>Contact Us</h2>
+                    <p><i class="fa-solid fa-phone"></i><i class="fa-solid fa-comments"></i><i
+                            class="fa-brands fa-whatsapp"></i></p>
+                    <p>24X7 Enquiry Support ( ALL Days )</p>
+                    <p>General:</p>
+                    <p><a href="#">Contactus@Caratlane.Com</a></p>
+                    <p>Corporate:<a href="#">B2B@Caratlane.Com</a></p>
+                    <p>HR:<a href="#">Careers@Caratlane.Com</a></p>
+                    <p>Grievance:<a href="#">Contactus@Caratlane.Com</a></p>
+                </div>
+            </section>
+        </footer>
+
+    </body>
+
+    <script src="https://kit.fontawesome.com/cbfe85fe31.js" crossorigin="anonymous"></script>
+    <script>
+        let productDisplay = document.querySelector("#product-display");
+        let productheadingSpan = document.querySelectorAll("#product-heading-right>span");
+        let csReview = document.querySelector("#cs-review");
+        let sortPrice = document.querySelector("#sort");
+        let sortcartegory = document.querySelector("#cartegory");
+        let manualFilter = document.querySelector("#filter-btn")
+        let filterInputs = document.querySelectorAll("#filter>input")
+
+
+        let arr =
+            [{
+                id: 1,
+                image: "https://cdn.caratlane.com/media/catalog/product/U/T/UT00168-YG0000_1_lar.jpg",
+                discountPrice: 8359,
+                actualPrice: 8868,
+                description: "Ornate Om Baby Nazaria Gold Bracelet",
+                category: "Bracelet"
+
+            },
+
+            {
+                id: 2,
+                image: "https://cdn.caratlane.com/media/catalog/product/U/T/UT00167-YG0000_1_lar.jpg",
+                discountPrice: 7855,
+                actualPrice: 8365,
+                description: "Swastik Baby Nazaria Gold Bracelet",
+                category: "Bracelet"
+            },
+
+            {
+                id: 3,
+                image: "https://cdn.caratlane.com/media/catalog/product/J/E/JE03938-YGP600_1_lar.jpg",
+                discountPrice: 8421,
+                actualPrice: 10527,
+                description: "Love Cursive Gold Kid's Alloys Ring",
+                category: "Earnings"
+            },
+
+            {
+                id: 4,
+                image: "https://cdn.caratlane.com/media/catalog/product/J/E/JE06187-1RP600_1_lar.jpg",
+                discountPrice: 9396,
+                actualPrice: 11744,
+                description: "Quad Geometric Diamond Stud Earrings",
+                category: "Earnings"
+            },
+
+            {
+                id: 5,
+                image: "https://cdn.caratlane.com/media/catalog/product/cache/6/image/480x480/9df78eab33525d08d6e5fb8d27136e95/J/T/JT02084-1YP900_11_listfront.jpg",
+                discountPrice: 8702,
+                actualPrice: 10237,
+                description: "Delicate Quad Diamond Bracelet",
+                category: "Chain"
+            },
+
+            {
+                id: 6,
+                image: "https://cdn.caratlane.com/media/catalog/product/U/E/UE04499-1Y0000_1_lar.jpg",
+                discountPrice: 5800,
+                actualPrice: 6243,
+                description: "Magical Unicorn Kids' Gold Earrings",
+                category: "Earnings"
+            },
+
+
+            {
+                id: 7,
+                image: "https://cdn.caratlane.com/media/catalog/product/J/N/JN00048-YGP900_1_lar.jpg",
+                discountPrice: 7111,
+                actualPrice: 7901,
+                description: "Isha Delight Diamond Kid's Alloys Nose Pin",
+                category: "Earnings"
+            },
+            {
+                id: 8,
+                image: "https://cdn.caratlane.com/media/catalog/product/G/C/GC00032-2Y0000_1_lar.jpg",
+                discountPrice: 7643,
+                actualPrice: 8673,
+                description: "Alloy Gold-plated Jewel Set  (Black, Multicolor)",
+                category: "Gold Coin"
+
+            },
+            {
+                id: 9,
+                image: "https://cdn.caratlane.com/media/catalog/product/G/C/GC00010-4Y0000_1_lar.jpg",
+                discountPrice: 7943,
+                actualPrice: 8673,
+                description: "10g, 24Kt Lord Balaji Gold Coin",
+                category: "Gold Coin"
+            },
+            {
+                id: 10,
+                image: "https://cdn.caratlane.com/media/catalog/product/G/C/GC00053-4Y0000_1_lar.jpg",
+                discountPrice: 8243,
+                actualPrice: 8673,
+                description: "7g, 24Kt Lord Balaji Gold Coin",
+                category: "Gold Coin"
+            },
+            {
+                id: 11,
+                image: "https://cdn.caratlane.com/media/catalog/product/G/C/GC00029-2Y0000_1_lar.jpg",
+                discountPrice: 9643,
+                actualPrice: 8673,
+                description: "8g, 22Kt Plain Gold Coin",
+                category: "Gold Coin"
+            },
+            {
+                id: 12,
+                image: "https://rukminim1.flixcart.com/image/832/832/kazor680/jewellery-set/t/y/r/msut1001-prasub-original-imafsfw4rwjbhk2f.jpeg?q=70",
+                discountPrice: 12643,
+                actualPrice: 8673,
+                description: "5g, 22Kt Gold Chain",
+                category: "Chain"
+
+            },
+            {
+                id: 13,
+                image: "https://rukminim1.flixcart.com/image/612/612/xif0q/jewellery-set/n/h/7/na-na-cbns104734-sukkhi-original-imagyn8dwwgg5ufy.jpeg?q=70",
+                discountPrice: 6643,
+                actualPrice: 8673,
+                description: "Alloy Gold-plated Jewel Set  (Gold)",
+                category: "Necklace"
+            },
+
+            {
+                id: 14,
+                image: "https://rukminim1.flixcart.com/image/612/612/xif0q/necklace-chain/f/8/r/1-skr68959-chain-sukkhi-original-imagj53f54b85yhy.jpeg?q=70",
+                discountPrice: 16643,
+                actualPrice: 8673,
+                description: "Designer Gold-plated Plated Brass Chain",
+                category: "Necklace"
+            },
+            {
+                id: 15,
+                image: "https://rukminim1.flixcart.com/image/612/612/xif0q/ring/v/m/q/adjustable-1-rose-mkmr106g-ring-myki-original-imaggdywetaf2g3z.jpeg?q=70",
+                discountPrice: 85643,
+                actualPrice: 8673,
+                description: "Exclusive Limited Edition 24KT Gold Swarovski Solitaire",
+                category: "Bracelet"
+            },
+            {
+                id: 16,
+                image: "https://cdn.caratlane.com/media/catalog/product/U/P/UP00899-1Y0000_1_lar.jpg",
+                discountPrice: 8186,
+                actualPrice: 7895,
+                description: "Fashionable Evil Eye Gold Pendant",
+                category: "Necklace"
+            },
+
+
+            {
+                id: 17,
+                image: "https://cdn.caratlane.com/media/catalog/product/U/T/UT00684-1Y0000_1_lar.jpg",
+                discountPrice: 7191,
+                actualPrice: 7500,
+                description: "Infinity Love Adjustable Gold Bracelet",
+                category: "Bracelet"
+            },
+
+
+            {
+                id: 18,
+                image: "https://cdn.caratlane.com/media/catalog/product/U/T/UT00702-1Y0000_1_lar.jpg",
+                discountPrice: 6692,
+                actualPrice: 7799,
+                description: "Chopper Personalised Kids' Gold Bracelet",
+                category: "Bracelet"
+            },
+
+
+            {
+                id: 19,
+                image: "https://cdn.caratlane.com/media/catalog/product/U/P/UP00058-YG0000_1_lar.jpg",
+                discountPrice: 6319,
+                actualPrice: 7169,
+                description: "Daddy's Princess Kids' Gold Pendant",
+                category: "Necklace"
+            },
+
+            {
+                id: 20,
+                image: "https://cdn.caratlane.com/media/catalog/product/U/E/UE04784-YG0000_1_lar.jpg",
+                discountPrice: 9449,
+                actualPrice: 9789,
+                description: "Saima Cutout Gold Drop Earrings",
+                category: "Earnings"
+            },
+
+            {
+                id: 21,
+                image: "https://cdn.caratlane.com/media/catalog/product/U/T/UT00842-1Y0000_1_lar.jpg",
+                discountPrice: 7643,
+                actualPrice: 8673,
+                description: "Butterflies Baby Nazaria Gold Bracelet",
+                category: "Bracelet"
+            },
+
+
+            {
+                id: 22,
+                image: "https://cdn.caratlane.com/media/catalog/product/U/E/UE04655-1Y0000_6_lar.jpg",
+                discountPrice: 5635,
+                actualPrice: 6078,
+                description: "Enchanted Unicorn Kids' Gold Earrings",
+                category: "Earnings"
+            },
+
+            {
+                id: 23,
+                image: "https://cdn.caratlane.com/media/catalog/product/U/R/UR00681-1Y0000_1_lar.jpg",
+                discountPrice: 9862,
+                actualPrice: 10233,
+                description: "Trillium Diamond Stud couple Earrings",
+                category: "Bracelet"
+
+            },
+            {
+                id: 24,
+                image: "https://cdn.caratlane.com/media/catalog/product/G/C/GC00043-4Y0000_1_lar.jpg",
+                discountPrice: 9529,
+                actualPrice: 10089,
+                description: "Saima Cutout Gold Drop Earrings",
+                category: "Gold Coin"
+            }
+            ];
+
+        displayProduct(arr);
+
+        // product display start here
+        function displayProduct(data) {
+            productDisplay.innerHTML = "";
+            data.forEach((element) => {
+                let div1 = document.createElement("div");
+                let div2 = document.createElement("div");
+                let div3 = document.createElement("div");
+                let anchorTag = document.createElement("a")
+                div2.classList.add("product-img");
+                div3.classList.add("product-text");
+                let image = document.createElement("img");
+                let price = document.createElement("h3");
+                let priceDiscount = document.createElement("h2");
+                let description = document.createElement("p");
+
+                priceDiscount.classList.add("neglect-price");
+                anchorTag.setAttribute("href", "productPage.html")
+                image.setAttribute("src", element.image);
+                price.innerText = `₹ ${element.actualPrice}`;
+                priceDiscount.innerText = `₹ ${element.discountPrice}`;
+                description.innerText = element.description;
+                div2.append(image);
+                div3.append(price, priceDiscount, description);
+                div1.append(div2, div3);
+                anchorTag.append(div1)
+                productDisplay.append(anchorTag);
+
+                // when Some click on product for showing product in a new page
+                anchorTag.addEventListener("click", () => {
+
+                    localStorage.setItem("selectedProduct", JSON.stringify(element))
+                })
+
+
+            });
+        }
+
+        // for sorting item by their price according to ascending and descendign order
+        sortPrice.addEventListener("change", () => {
+
+            if (sortPrice.value === 'asc') {
+
+                arr.sort((a, b) => a.discountPrice - b.discountPrice)
+
+                displayProduct(arr)
+            }
+            else if (sortPrice.value === 'desc') {
+                arr.sort((a, b) => b.discountPrice - a.discountPrice)
+                displayProduct(arr)
+            }
+            else {
+                displayProduct(arr)
+            }
+        })
+
+
+        // for sorting item by their category
+        sortcartegory.addEventListener("change", () => {
+            let filter = arr.filter((element) => {
+                if (element.category === sortcartegory.value) {
+                    return element
+                }
+            });
+            displayProduct(filter)
+        })
+
+
+        //   when someOne wants to have products according to his price range
+        manualFilter.addEventListener("click", () => {
+            let filter = arr.filter((element) => {
+
+                if (element.discountPrice >= (Number(filterInputs[0].value)) && (Number(filterInputs[1].value)) >= element.discountPrice) {
+                    return element
+                }
+            });
+
+            displayProduct(filter)
+        })
+        displayProduct(arr)
+
+        // when someOne click on searchBtn start
+
+        let searchInput = document.querySelector("#nav-right>form>input");
+        let searchClickBtn = document.querySelector("#nav-right>form>i");
+        let searchForm = document.querySelector(".searchForm");
+
+        function searchItems() {
+
+            let inputFilter = arr.filter((element) => element.description.toLowerCase().includes(searchInput.value.toLowerCase()))
+            displayProduct(inputFilter)
+        }
+        searchForm.addEventListener("submit", () => {
+            event.preventDefault()
+            searchItems()
+
+        })
+
+        searchClickBtn.addEventListener("click", ()=>{
+            searchItems()
+        })
+
+
+
+
+
+    </script>
+
+</html>
