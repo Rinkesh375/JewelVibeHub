@@ -1,1 +1,1 @@
-let name = "RINKE"
+let name = "RINK"
